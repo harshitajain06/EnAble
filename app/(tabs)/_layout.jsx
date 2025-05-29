@@ -1,19 +1,19 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomePage from './Home';
-import HousingPage from './Housing';
-import CarePage from './Care';
-import TransportPage from './Transport'
-import RegisterScreen from './Register';
-import Login from './Login';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { signOut } from 'firebase/auth';
+import React from 'react';
+import { auth } from '../../config/firebase';
 import { Colors } from '../../constants/Colors';
 import { useColorScheme } from '../../hooks/useColorScheme';
-import { Ionicons } from '@expo/vector-icons';
-import { signOut } from 'firebase/auth';
-import { auth } from '../../config/firebase';
-import { useNavigation } from '@react-navigation/native';
+import CarePage from './Care';
+import HomePage from './Home';
+import HousingPage from './Housing';
+import RegisterScreen from './Register';
+import TransportPage from './Transport';
+import Login from './index';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
