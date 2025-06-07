@@ -65,6 +65,10 @@ const HousingPage = () => {
           {item.contactEmail}
         </Text>
       </View>
+      <View style={styles.row}>
+        <MaterialIcons name="accessible" size={18} color="#555" />
+        <Text style={styles.detail}>Accessibility: {item.accessibility}</Text>
+      </View>
     </View>
   );
 
