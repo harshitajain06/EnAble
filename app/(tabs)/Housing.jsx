@@ -46,12 +46,39 @@ const HousingPage = () => {
         <Text style={styles.detail}>Rent: {item.rent}</Text>
       </View>
       <View style={styles.row}>
+        <MaterialIcons name="document-scanner" size={18} color="#555" />
+        <Text style={styles.detail}>Deposit: {item.deposit}</Text>
+      </View>
+      <View style={styles.row}>
+        <MaterialIcons name="content-paste" size={18} color="#555" />
+        <Text style={styles.detail}>Application Fees: {item.applicationFees}</Text>
+      </View>
+      {/*
+      <View style={styles.row}>
         <MaterialIcons name="calendar-today" size={18} color="#555" />
         <Text style={styles.detail}>Lease: {item.lease}</Text>
       </View>
+      */}
+      
+      <View style={styles.row}>
+        <MaterialIcons name="accessible" size={18} color="#555" />
+        <Text style={styles.detail}>Accessibility: {item.accessibility}</Text>
+      </View>
+      <View style={styles.row}>
+        <MaterialIcons name="elderly" size={18} color="#555" />
+        <Text style={styles.detail}>Age Requirement: {item.ageRequirement}</Text>
+      </View>
+      <View style={styles.row}>
+        <MaterialIcons name="money" size={18} color="#555" />
+        <Text style={styles.detail}>Income Requirement: {item.incomeRequirement}</Text>
+      </View>
+      <View style={styles.row}>
+        <MaterialIcons name="pets" size={18} color="#555" />
+        <Text style={styles.detail}>Pets: {item.pets}</Text>
+      </View>
       <View style={styles.row}>
         <MaterialIcons name="person" size={18} color="#555" />
-        <Text style={styles.detail}>{item.contactName}</Text>
+        <Text style={styles.detail}>Contact Name: {item.contactName}</Text>
       </View>
       <View style={styles.row}>
         <MaterialIcons name="phone" size={18} color="#555" />
@@ -64,10 +91,6 @@ const HousingPage = () => {
         <Text style={styles.link} onPress={() => handleEmail(item.contactEmail)}>
           {item.contactEmail}
         </Text>
-      </View>
-      <View style={styles.row}>
-        <MaterialIcons name="accessible" size={18} color="#555" />
-        <Text style={styles.detail}>Accessibility: {item.accessibility}</Text>
       </View>
     </View>
   );
