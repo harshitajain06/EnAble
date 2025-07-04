@@ -175,7 +175,7 @@ const HousingPage = () => {
         <Text style={styles.detail}>Bathroom Accessibility: {item.bathroom}</Text>
       </View>
       <View style={styles.row}>
-        <MaterialIcons name="soup-kitchen" size={18} color="#555" />
+        <MaterialIcons name="local-parking" size={18} color="#555" />
         <Text style={styles.detail}>Parking Accessibility: {item.parking}</Text>
       </View>
       <View style={styles.row}>
