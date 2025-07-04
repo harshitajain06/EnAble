@@ -7,14 +7,21 @@ const HomePage = () => {
 
   return (
     <View style={styles.container}>
-      {/* Logo */}
-      <Image source={require('../../assets/images/Logo.png')} style={styles.logo} />
+      <View style={styles.content}>
+        {/* Logo */}
+        <Image source={require('../../assets/images/Logo.png')} style={styles.logo} />
 
-      {/* Title and Subtitle */}
-      <Text style={styles.title}>Welcome to</Text>
-      <Text style={styles.subtitle}>En-able</Text>
-      <Text style={styles.author}>Created by Shaunak Soni</Text>
-      <Text style={styles.descrpition}>EnAble is a mobile app that helps individuals with disabilities easily find accessible housing. It features real-time listings of disability-friendly homes and shows nearby transportation, hospitals, and essential services. EnAble empowers users to make safe, informed decisions that support mobility and independence. </Text>
+        {/* Title and Subtitle */}
+        <Text style={styles.title}>Welcome to</Text>
+        <Text style={styles.subtitle}>En-able</Text>
+        <Text style={styles.author}>Created by Shaunak Soni</Text>
+        <Text style={styles.description}>
+          EnAble is a mobile app that helps individuals with disabilities easily find accessible
+          housing. It features real-time listings of disability-friendly homes and shows nearby
+          transportation, hospitals, and essential services. EnAble empowers users to make safe,
+          informed decisions that support mobility and independence.
+        </Text>
+      </View>
     </View>
   );
 };
@@ -22,12 +29,16 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#DCE9FE',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCE9FE',
+    paddingHorizontal: 20,
+  },
+  content: {
+    alignItems: 'center',
   },
   logo: {
-    width: 100, // Adjusted to match the logo size on the Login page
+    width: 100,
     height: 100,
     marginBottom: 20,
   },
@@ -45,14 +56,13 @@ const styles = StyleSheet.create({
   author: {
     fontSize: 16,
     color: '#567396',
-    marginBottom: 40,
+    marginBottom: 20,
   },
-  descrpition: {
-    fontSize: 20,
+  description: {
+    fontSize: 18,
     color: '#567396',
-    marginBottom: 0,
-    padding: 25,
-    borderRadius: 12,
+    textAlign: 'center',
+    lineHeight: 24,
   },
 });
 
