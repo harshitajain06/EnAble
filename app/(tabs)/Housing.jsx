@@ -23,6 +23,9 @@ const HousingPage = () => {
   const [selectedBath, setSelectedBath] = useState('Any');
   const [applicationFeesFilter, setApplicationFeesFilter] = useState('Any');
   const [accessibilityFilter, setAccessibilityFilter] = useState('Any');
+  const [kitchenFilter, setKitchenFilter] = useState('Any');
+  const [bathroomFilter, setBathroomFilter] = useState('Any');
+  const [mobilityFilter, setMobilityFilter] = useState('Any');
   const [ageRequirementFilter, setAgeRequirementFilter] = useState('Any');
   const [incomeRequirementFilter, setIncomeRequirementFilter] = useState('Any');
   const [petsFilter, setPetsFilter] = useState('Any');
@@ -52,6 +55,9 @@ const HousingPage = () => {
     selectedBath,
     applicationFeesFilter,
     accessibilityFilter,
+    kitchenFilter,
+    bathroomFilter,
+    mobilityFilter,
     ageRequirementFilter,
     incomeRequirementFilter,
     petsFilter,
@@ -80,6 +86,24 @@ const HousingPage = () => {
     if (accessibilityFilter !== 'Any') {
       filtered = filtered.filter(item =>
         item.accessibility?.toLowerCase().includes(accessibilityFilter.toLowerCase())
+      );
+    }
+
+    if (kitchenFilter !== 'Any') {
+      filtered = filtered.filter(item =>
+        item.kitchen?.toLowerCase().includes(kitchenFilter.toLowerCase())
+      );
+    }
+
+    if (bathroomFilter !== 'Any') {
+      filtered = filtered.filter(item =>
+        item.bathroom?.toLowerCase().includes(bathroomFilter.toLowerCase())
+      );
+    }
+
+    if (mobilityFilter !== 'Any') {
+      filtered = filtered.filter(item =>
+        item.mobility?.toLowerCase().includes(mobilityFilter.toLowerCase())
       );
     }
 
@@ -143,8 +167,20 @@ const HousingPage = () => {
         <Text style={styles.detail}>Application Fees: {item.applicationFees}</Text>
       </View>
       <View style={styles.row}>
+        <MaterialIcons name="soup-kitchen" size={18} color="#555" />
+        <Text style={styles.detail}>Kitchen Accessibility: {item.kitchen}</Text>
+      </View>
+      <View style={styles.row}>
+        <MaterialIcons name="bathtub" size={18} color="#555" />
+        <Text style={styles.detail}>Bathroom Accessibility: {item.bathroom}</Text>
+      </View>
+      <View style={styles.row}>
+        <MaterialIcons name="soup-kitchen" size={18} color="#555" />
+        <Text style={styles.detail}>Parking Accessibility: {item.parking}</Text>
+      </View>
+      <View style={styles.row}>
         <MaterialIcons name="accessible" size={18} color="#555" />
-        <Text style={styles.detail}>Accessibility: {item.accessibility}</Text>
+        <Text style={styles.detail}>General Accessibility: {item.mobility}</Text>
       </View>
       <View style={styles.row}>
         <MaterialIcons name="elderly" size={18} color="#555" />
@@ -220,12 +256,36 @@ const HousingPage = () => {
             <Picker.Item label="No" value="No" />
           </Picker>
 
-          <Text style={styles.filterLabel}>Accessibility</Text>
-          <Picker selectedValue={accessibilityFilter} onValueChange={setAccessibilityFilter}>
+          <Text style={styles.filterLabel}>Kitchen</Text>
+          <Picker selectedValue={kitchenFilter} onValueChange={setKitchenFilter}>
             <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="No Step Entrance" value="No Step Entrance" />
-            <Picker.Item label="Grab Bars" value="Grab Bars" />
-            <Picker.Item label="Lever Handles" value="Lever Handles" />
+            <Picker.Item label="Front Controls on Stove/Cook-top" value="Front Controls on Stove/Cook-top" />
+            <Picker.Item label="Non digital Kitchen appliances" value="Non digital Kitchen appliances" />
+          </Picker>
+
+          <Text style={styles.filterLabel}>Bathroom</Text>
+          <Picker selectedValue={bathroomFilter} onValueChange={setBathroomFilter}>
+            <Picker.Item label="Any" value="Any" />
+            <Picker.Item label="Accessible Height Toilet" value="Accessible Height Toilet" />
+            <Picker.Item label="Bath Grab Bars or Reinforcements" value="Bath Grab Bars or Reinforcements" />
+            <Picker.Item label="Toilet Grab Bars or Reinforcements" value="Toilet Grab" />
+            <Picker.Item label="Walk in Shower" value="Walk-in Shower" />
+            <Picker.Item label="Lever Handles on Doors and Faucets" value="Lever Handles on Doors and Faucets" />
+          </Picker>
+
+          <Text style={styles.filterLabel}>Parking</Text>
+          <Picker selectedValue={parkingFilter} onValueChange={setParkingFilter}>
+            <Picker.Item label="Any" value="Any" />
+            <Picker.Item label="Off Street" value="off street" />
+            <Picker.Item label="Infront of Unit" value="infront of unit" />
+            <Picker.Item label="On Street" value="on street" />
+          </Picker>
+
+          <Text style={styles.filterLabel}>General Accessibility</Text>
+          <Picker selectedValue={mobilityFilter} onValueChange={setMobilityFilter}>
+            <Picker.Item label="Any" value="Any" />
+            <Picker.Item label="Front Controls on Stove/Cook-top" value="Front Controls on Stove/Cook-top" />
+            <Picker.Item label="Non digital Kitchen appliances" value="Non digital Kitchen appliances" />
           </Picker>
 
           <Text style={styles.filterLabel}>Age Requirement</Text>
@@ -247,14 +307,6 @@ const HousingPage = () => {
             <Picker.Item label="Any" value="Any" />
             <Picker.Item label="Yes" value="yes" />
             <Picker.Item label="No" value="no" />
-          </Picker>
-
-          <Text style={styles.filterLabel}>Parking</Text>
-          <Picker selectedValue={parkingFilter} onValueChange={setParkingFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Off Street" value="off street" />
-            <Picker.Item label="Infront of Unit" value="infront of unit" />
-            <Picker.Item label="On Street" value="on street" />
           </Picker>
 
           <View style={{ marginVertical: 20 }}>
