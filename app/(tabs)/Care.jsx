@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, Linking, Platform, TouchableOpacity } from 'react-native';
+import { WebView } from 'react-native-webview';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../config/firebase'; // adjust if path differs
+import { db } from '../../config/firebase';
 
 const CarePage = () => {
   const [services, setServices] = useState([]);
@@ -23,9 +24,17 @@ const CarePage = () => {
   const renderItem = ({ item }) => (
     <View style={styles.card}>
       <Text style={styles.name}>{item.serviceName}</Text>
-      <TouchableOpacity onPress={() => Linking.openURL(item.serviceLink)}>
-        <Text style={styles.link}>View Location</Text>
-      </TouchableOpacity>
+
+      {Platform.OS === 'web' ? (
+        <TouchableOpacity onPress={() => window.open(item.serviceLink, '_blank')}>
+          <Text style={styles.link}>Open Service</Text>
+        </TouchableOpacity>
+      ) : (
+        <WebView
+          source={{ uri: item.serviceLink }}
+          style={styles.mapView}
+        />
+      )}
     </View>
   );
 
@@ -63,18 +72,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 16,
     borderRadius: 10,
-    marginBottom: 12,
+    marginBottom: 20,
     elevation: 2,
   },
   name: {
     fontSize: 16,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 8,
+    marginBottom: 10,
+  },
+  mapView: {
+    height: 300,
+    borderRadius: 10,
+    overflow: 'hidden',
   },
   link: {
-    fontSize: 14,
-    color: '#007AFF',
+    color: '#007bff',
     textDecorationLine: 'underline',
+    fontSize: 16,
   },
 });
