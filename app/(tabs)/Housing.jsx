@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Modal,
   Button,
+  ScrollView,
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { collection, getDocs } from 'firebase/firestore';
@@ -227,92 +228,94 @@ const HousingPage = () => {
         contentContainerStyle={styles.list}
       />
 
-      {/* Filters Modal */}
+      {/* Filters Modal with ScrollView */}
       <Modal animationType="slide" transparent={false} visible={modalVisible}>
         <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>Filter Listings</Text>
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+            <Text style={styles.modalTitle}>Filter Listings</Text>
 
-          <Text style={styles.filterLabel}>Bed</Text>
-          <Picker selectedValue={selectedBed} onValueChange={setSelectedBed}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3" value="3" />
-            <Picker.Item label="4+" value="4" />
-          </Picker>
+            <Text style={styles.filterLabel}>Bed</Text>
+            <Picker selectedValue={selectedBed} onValueChange={setSelectedBed}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="1" value="1" />
+              <Picker.Item label="2" value="2" />
+              <Picker.Item label="3" value="3" />
+              <Picker.Item label="4+" value="4" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Bath</Text>
-          <Picker selectedValue={selectedBath} onValueChange={setSelectedBath}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="1" value="1" />
-            <Picker.Item label="2" value="2" />
-            <Picker.Item label="3+" value="3" />
-          </Picker>
+            <Text style={styles.filterLabel}>Bath</Text>
+            <Picker selectedValue={selectedBath} onValueChange={setSelectedBath}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="1" value="1" />
+              <Picker.Item label="2" value="2" />
+              <Picker.Item label="3+" value="3" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Application Fees</Text>
-          <Picker selectedValue={applicationFeesFilter} onValueChange={setApplicationFeesFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Yes" value="Yes" />
-            <Picker.Item label="No" value="No" />
-          </Picker>
+            <Text style={styles.filterLabel}>Application Fees</Text>
+            <Picker selectedValue={applicationFeesFilter} onValueChange={setApplicationFeesFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Yes" value="Yes" />
+              <Picker.Item label="No" value="No" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Kitchen</Text>
-          <Picker selectedValue={kitchenFilter} onValueChange={setKitchenFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Front Controls on Stove/Cook-top" value="Front Controls on Stove/Cook-top" />
-            <Picker.Item label="Non digital Kitchen appliances" value="Non digital Kitchen appliances" />
-          </Picker>
+            <Text style={styles.filterLabel}>Kitchen</Text>
+            <Picker selectedValue={kitchenFilter} onValueChange={setKitchenFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Front Controls on Stove/Cook-top" value="Front Controls on Stove/Cook-top" />
+              <Picker.Item label="Non digital Kitchen appliances" value="Non digital Kitchen appliances" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Bathroom</Text>
-          <Picker selectedValue={bathroomFilter} onValueChange={setBathroomFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Accessible Height Toilet" value="Accessible Height Toilet" />
-            <Picker.Item label="Bath Grab Bars or Reinforcements" value="Bath Grab Bars or Reinforcements" />
-            <Picker.Item label="Toilet Grab Bars or Reinforcements" value="Toilet Grab" />
-            <Picker.Item label="Walk in Shower" value="Walk-in Shower" />
-            <Picker.Item label="Lever Handles on Doors and Faucets" value="Lever Handles on Doors and Faucets" />
-          </Picker>
+            <Text style={styles.filterLabel}>Bathroom</Text>
+            <Picker selectedValue={bathroomFilter} onValueChange={setBathroomFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Accessible Height Toilet" value="Accessible Height Toilet" />
+              <Picker.Item label="Bath Grab Bars or Reinforcements" value="Bath Grab Bars or Reinforcements" />
+              <Picker.Item label="Toilet Grab Bars or Reinforcements" value="Toilet Grab" />
+              <Picker.Item label="Walk in Shower" value="Walk-in Shower" />
+              <Picker.Item label="Lever Handles on Doors and Faucets" value="Lever Handles on Doors and Faucets" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Parking</Text>
-          <Picker selectedValue={parkingFilter} onValueChange={setParkingFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Off Street" value="off street" />
-            <Picker.Item label="Infront of Unit" value="infront of unit" />
-            <Picker.Item label="On Street" value="on street" />
-          </Picker>
+            <Text style={styles.filterLabel}>Parking</Text>
+            <Picker selectedValue={parkingFilter} onValueChange={setParkingFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Off Street" value="off street" />
+              <Picker.Item label="Infront of Unit" value="infront of unit" />
+              <Picker.Item label="On Street" value="on street" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>General Accessibility</Text>
-          <Picker selectedValue={mobilityFilter} onValueChange={setMobilityFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Front Controls on Stove/Cook-top" value="Front Controls on Stove/Cook-top" />
-            <Picker.Item label="Non digital Kitchen appliances" value="Non digital Kitchen appliances" />
-          </Picker>
+            <Text style={styles.filterLabel}>General Accessibility</Text>
+            <Picker selectedValue={mobilityFilter} onValueChange={setMobilityFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Front Controls on Stove/Cook-top" value="Front Controls on Stove/Cook-top" />
+              <Picker.Item label="Non digital Kitchen appliances" value="Non digital Kitchen appliances" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Age Requirement</Text>
-          <Picker selectedValue={ageRequirementFilter} onValueChange={setAgeRequirementFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Yes" value="yes" />
-            <Picker.Item label="No" value="no" />
-          </Picker>
+            <Text style={styles.filterLabel}>Age Requirement</Text>
+            <Picker selectedValue={ageRequirementFilter} onValueChange={setAgeRequirementFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Yes" value="yes" />
+              <Picker.Item label="No" value="no" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Income Requirement</Text>
-          <Picker selectedValue={incomeRequirementFilter} onValueChange={setIncomeRequirementFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Yes" value="yes" />
-            <Picker.Item label="No" value="no" />
-          </Picker>
+            <Text style={styles.filterLabel}>Income Requirement</Text>
+            <Picker selectedValue={incomeRequirementFilter} onValueChange={setIncomeRequirementFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Yes" value="yes" />
+              <Picker.Item label="No" value="no" />
+            </Picker>
 
-          <Text style={styles.filterLabel}>Pets</Text>
-          <Picker selectedValue={petsFilter} onValueChange={setPetsFilter}>
-            <Picker.Item label="Any" value="Any" />
-            <Picker.Item label="Yes" value="yes" />
-            <Picker.Item label="No" value="no" />
-          </Picker>
+            <Text style={styles.filterLabel}>Pets</Text>
+            <Picker selectedValue={petsFilter} onValueChange={setPetsFilter}>
+              <Picker.Item label="Any" value="Any" />
+              <Picker.Item label="Yes" value="yes" />
+              <Picker.Item label="No" value="no" />
+            </Picker>
 
-          <View style={{ marginVertical: 20 }}>
-            <Button title="Apply Filters" onPress={() => setModalVisible(false)} />
-          </View>
-          <Button title="Close" color="gray" onPress={() => setModalVisible(false)} />
+            <View style={{ marginVertical: 20 }}>
+              <Button title="Apply Filters" onPress={() => setModalVisible(false)} />
+            </View>
+            <Button title="Close" color="gray" onPress={() => setModalVisible(false)} />
+          </ScrollView>
         </View>
       </Modal>
     </View>
@@ -374,7 +377,6 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    padding: 16,
     backgroundColor: '#fff',
   },
   modalTitle: {
@@ -386,5 +388,10 @@ const styles = StyleSheet.create({
   filterLabel: {
     fontWeight: 'bold',
     marginTop: 10,
+    paddingLeft: 12,
+  },
+  scrollContent: {
+    padding: 16,
+    paddingBottom: 40,
   },
 });
