@@ -12,8 +12,7 @@ const HomePage = () => {
         <Image source={require('../../assets/images/Logo.png')} style={styles.logo} />
 
         {/* Title and Subtitle */}
-        <Text style={styles.title}>Welcome to</Text>
-        <Text style={styles.subtitle}>EnAble</Text>
+        <Text style={styles.subtitle}>About EnAble</Text>
         <Text style={styles.author}>Created by Shaunak Soni</Text>
 
         {/* Description */}

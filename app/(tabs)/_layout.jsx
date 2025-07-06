@@ -50,10 +50,10 @@ const BottomTabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomePage} />
-      <Tab.Screen name="About" component={AboutPage} />
       <Tab.Screen name="Housing" component={HousingPage} />
       <Tab.Screen name="Transport" component={TransportPage} />
       <Tab.Screen name="Care" component={CarePage} />
+      <Tab.Screen name="About" component={AboutPage} />
     </Tab.Navigator>
   );
 };

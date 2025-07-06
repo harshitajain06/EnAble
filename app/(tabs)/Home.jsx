@@ -14,12 +14,9 @@ const HomePage = () => {
         {/* Title and Subtitle */}
         <Text style={styles.title}>Welcome to</Text>
         <Text style={styles.subtitle}>EnAble</Text>
-        <Text style={styles.author}>Created by Shaunak Soni</Text>
         <Text style={styles.description}>
           EnAble is a mobile app that helps individuals with disabilities easily find accessible
-          housing. It features listings of disability-friendly homes and shows nearby
-          transportation, hospitals, and essential services. EnAble empowers users to make safe,
-          informed decisions that support mobility and independence.
+          housing.
         </Text>
       </View>
     </View>
