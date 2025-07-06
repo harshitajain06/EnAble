@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   author: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#567396',
     marginBottom: 20,
   },
