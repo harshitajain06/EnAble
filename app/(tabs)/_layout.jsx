@@ -9,6 +9,7 @@ import { Alert } from 'react-native';
 import { auth } from '../../config/firebase';
 import { Colors } from '../../constants/Colors';
 import { useColorScheme } from '../../hooks/useColorScheme';
+
 import CarePage from './Care';
 import HomePage from './Home';
 import HousingPage from './Housing';
@@ -50,10 +51,10 @@ const BottomTabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen name="About" component={AboutPage} />
       <Tab.Screen name="Housing" component={HousingPage} />
       <Tab.Screen name="Transport" component={TransportPage} />
       <Tab.Screen name="Care" component={CarePage} />
-      <Tab.Screen name="About" component={AboutPage} />
     </Tab.Navigator>
   );
 };
@@ -64,7 +65,10 @@ const DrawerNavigator = () => {
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        navigation.replace('Login');
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Login' }],
+        });
       })
       .catch((err) => {
         console.error('Logout Error:', err);
@@ -87,7 +91,10 @@ const DrawerNavigator = () => {
               deleteUser(user)
                 .then(() => {
                   Alert.alert('Account Deleted', 'Your account has been deleted.');
-                  navigation.replace('Login');
+                  navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Login' }],
+                  });
                 })
                 .catch((err) => {
                   console.error('Delete Error:', err);
@@ -96,7 +103,7 @@ const DrawerNavigator = () => {
                       'Re-authentication required',
                       'Please log in again to delete your account.'
                     );
-                    handleLogout(); // Sign them out for fresh login
+                    handleLogout(); // Sign out to re-login
                   } else {
                     Alert.alert('Error', 'Failed to delete account.');
                   }
@@ -113,21 +120,16 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="MainTabs" component={BottomTabs} options={{ title: 'Home' }} />
 
       <Drawer.Screen
-        name="Logout"
-        component={BottomTabs}
+        name="PrivacyPolicy"
+        component={PrivacyPolicyPage}
         options={{
-          title: 'Logout',
+          title: 'Privacy Policy',
           drawerIcon: ({ color, size }) => (
-            <Ionicons name="log-out-outline" size={size} color={color} />
+            <Ionicons name="document-text-outline" size={size} color={color} />
           ),
         }}
-        listeners={{
-          drawerItemPress: (e) => {
-            e.preventDefault();
-            handleLogout();
-          },
-        }}
       />
+
 
       <Drawer.Screen
         name="DeleteAccount"
@@ -145,17 +147,18 @@ const DrawerNavigator = () => {
           },
         }}
       />
-      <Drawer.Screen
-  name="PrivacyPolicy"
-  component={PrivacyPolicyPage}
-  options={{
-    title: 'Privacy Policy',
-    drawerIcon: ({ color, size }) => (
-      <Ionicons name="document-text-outline" size={size} color={color} />
-    ),
-  }}
-/>
 
+      {/* 👇 Login and Register hidden from drawer menu */}
+      <Drawer.Screen
+        name="Login"
+        component={Login}
+       
+      />
+      <Drawer.Screen
+        name="Register"
+        component={RegisterScreen}
+        
+      />
     </Drawer.Navigator>
   );
 };
@@ -163,8 +166,6 @@ const DrawerNavigator = () => {
 export default function StackLayout() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
     </Stack.Navigator>
   );
