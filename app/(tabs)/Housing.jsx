@@ -260,8 +260,13 @@ const HousingPage = () => {
         </ScrollView>
       </Modal>
 
-      {/* Option Selection Modal */}
-      <Modal animationType="fade" transparent visible={optionModalVisible}>
+      {/* Option Selection Modal - Always on top for iOS */}
+      <Modal
+        animationType="fade"
+        transparent
+        visible={optionModalVisible}
+        presentationStyle="overFullScreen" // 🔹 ensures overlay on iOS
+      >
         <View style={styles.optionModalOverlay}>
           <View style={styles.optionModal}>
             <Text style={styles.modalTitle}>Select {currentFilter}</Text>
