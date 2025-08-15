@@ -33,7 +33,7 @@ const HousingPage = () => {
 
   // Modal states
   const [filtersModalVisible, setFiltersModalVisible] = useState(false);
-  const [optionModalVisible, setOptionModalVisible] = useState(false);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
   const [currentFilter, setCurrentFilter] = useState(null);
 
   // Filter options
@@ -126,9 +126,9 @@ const HousingPage = () => {
   const handleCall = (phone) => Linking.openURL(`tel:${phone}`);
   const handleEmail = (email) => Linking.openURL(`mailto:${email}`);
 
-  const openOptionModal = (filterName) => {
+  const openBottomSheet = (filterName) => {
     setCurrentFilter(filterName);
-    setOptionModalVisible(true);
+    setBottomSheetVisible(true);
   };
 
   const handleSelectOption = (option) => {
@@ -144,11 +144,11 @@ const HousingPage = () => {
       case 'incomeRequirement': setIncomeRequirementFilter(option); break;
       case 'pets': setPetsFilter(option); break;
     }
-    setOptionModalVisible(false);
+    setBottomSheetVisible(false);
   };
 
   const renderFilterButton = (label, value, filterKey) => (
-    <TouchableOpacity style={styles.filterButton} onPress={() => openOptionModal(filterKey)}>
+    <TouchableOpacity style={styles.filterButton} onPress={() => openBottomSheet(filterKey)}>
       <Text style={styles.filterLabel}>{label}</Text>
       <Text style={styles.selectedValue}>{value}</Text>
     </TouchableOpacity>
@@ -258,17 +258,10 @@ const HousingPage = () => {
           </View>
           <Button title="Close" color="gray" onPress={() => setFiltersModalVisible(false)} />
         </ScrollView>
-      </Modal>
 
-      {/* Option Selection Modal - Always on top for iOS */}
-      <Modal
-        animationType="fade"
-        transparent
-        visible={optionModalVisible}
-        presentationStyle="overFullScreen" // 🔹 ensures overlay on iOS
-      >
-        <View style={styles.optionModalOverlay}>
-          <View style={styles.optionModal}>
+        {/* Bottom Sheet for Options */}
+        {bottomSheetVisible && (
+          <View style={styles.bottomSheet}>
             <Text style={styles.modalTitle}>Select {currentFilter}</Text>
             {filterOptions[currentFilter]?.map(opt => (
               <TouchableOpacity
@@ -279,9 +272,9 @@ const HousingPage = () => {
                 <Text style={styles.optionText}>{opt}</Text>
               </TouchableOpacity>
             ))}
-            <Button title="Cancel" onPress={() => setOptionModalVisible(false)} />
+            <Button title="Cancel" onPress={() => setBottomSheetVisible(false)} />
           </View>
-        </View>
+        )}
       </Modal>
     </View>
   );
@@ -320,12 +313,19 @@ const styles = StyleSheet.create({
   },
   filterLabel: { fontSize: 16, fontWeight: '500' },
   selectedValue: { fontSize: 16, color: '#555' },
-  optionModalOverlay: {
-    flex: 1, backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center', alignItems: 'center'
-  },
-  optionModal: {
-    backgroundColor: '#fff', borderRadius: 10, padding: 20, width: 280
+  bottomSheet: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#fff',
+    padding: 20,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 5
   },
   optionItem: { padding: 10, borderBottomWidth: 1, borderBottomColor: '#eee' },
   optionText: { fontSize: 16 }
